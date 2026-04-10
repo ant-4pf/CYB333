@@ -2,14 +2,16 @@ import socket
 class Scanner:
     def __init__(self, ip):
         self.ip = ip 
-        self.open_ports = [];
+        self.open_ports = []
 
     def __repr__(self):
         return f"Scanner: {self.ip}"
     
     def is_open(self, port):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(0.5)
         result =  s.connect_ex((self.ip, port))
+        s.close()
         return result == 0
         
     def add_port(self, port):
@@ -20,20 +22,20 @@ class Scanner:
             if self.is_open(port):
                 self.add_port(port)
     
-    def write(self, filename):
-        with open(filename, 'w') as f:
-            for port in self.open_ports:
-                f.write(f"(port{port} is open)\n")
+    def write(self, filepath):
+        openport = [str(port) for port in self.open_ports]
+        with open(filepath, 'w') as f:
+            f.write('\n'.join(openport))
 
-    def main():
-        ip = input("Enter the IP Address to scan: ")
-        lowerport = int(input("Enter the lower Port Number: "))
-        upperport = int(input("Enter the upper port number: "))
-        scanner = Scanner(ip)
-        scanner.scan(lowerport, upperport)
-        print(f"Open ports for {scanner.ip}: {scanner.open_ports}")
-        filename = input("Enter the filename to save the results: ")
-        scanner.write(filename)
+    
+def main():
+    ip = '10.0.0.163'
+    scanner = Scanner(ip)
+    scanner.scan(1,100)
+    scanner.write('open_ports.txt')
+    
 
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()
+
+

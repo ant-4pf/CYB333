@@ -18,21 +18,28 @@ class Scanner:
         self.open_ports.append(port)
 
     def scan(self, lowerport, upperport):
-        for port in range(lowerport,upperport + 1):
-            print(f"Scanning port {port}...")
-            if self.is_open(port):
-                self.add_port(port)
+        ports = [20,21,22,23,25,53,80,110,143,443,3306,3389]
+        for port in ports:
+            if lowerport <= port <= upperport:
+                print(f"Scanning port {port}...")
+                if self.is_open(port):
+                    self.add_port(port)
+                else: 
+                    print(f"Port {port} is closed.")
     
     def write(self, filepath):
-        openport = [str(port) for port in self.open_ports]
+        if not self.open_ports:
+            print("No open ports found.")
+            return
+        openport = [f"Port {port} is open" for port in self.open_ports]
         with open(filepath, 'w') as f:
             f.write('\n'.join(openport))
 
     
 def main():
-    ip = '8.8.8.8'
+    ip = 'scanme.nmap.org'
     scanner = Scanner(ip)
-    scanner.scan(1,10)
+    scanner.scan(20,450)
     scanner.write('open_ports.txt')
     
 

@@ -1,5 +1,5 @@
-print("Hello GitHub!")
+print("Hello Thereanthon!")
 name = input("Enter Your Name: ")
-print(f"Welcome{name} to GitHub!") 
+print(f"Welcome to Github, {name}!") 
 print("This is a test file for GitHub.")    
 

@@ -19,6 +19,7 @@ class Scanner:
 
     def scan(self, lowerport, upperport):
         for port in range(lowerport,upperport + 1):
+            print(f"Scanning port {port}...")
             if self.is_open(port):
                 self.add_port(port)
     
@@ -29,9 +30,9 @@ class Scanner:
 
     
 def main():
-    ip = '10.0.0.163'
+    ip = '8.8.8.8'
     scanner = Scanner(ip)
-    scanner.scan(1,100)
+    scanner.scan(1,10)
     scanner.write('open_ports.txt')
     
 

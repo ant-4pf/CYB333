@@ -12,13 +12,15 @@ def start_server():
             s.bind((HOST, PORT))
             s.listen()
             print(f"Server is listening on {HOST}:{PORT}")
+            #accept incoming connections and handle them in separate threads
             while True:
                 conn, addr = s.accept()
                 thread = threading.Thread(target=handle_client, args=(conn, addr))
                 thread.start()
+    #Error handling
     except Exception as e: 
         print(f"An error occurred: {e}")
-
+#Handle multiple client connections
 def handle_client(conn, addr):
     with conn:
         print(f"Connected by {addr}")

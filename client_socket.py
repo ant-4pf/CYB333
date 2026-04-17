@@ -2,8 +2,8 @@
 import socket
 
 #Define Host and Port
-HOST = 'scanme.nmap.org'
-PORT = 80
+HOST = '127.0.0.1'
+PORT = 65432
 
 #Create TCP/IP Socket and Start Client
 def start_client():

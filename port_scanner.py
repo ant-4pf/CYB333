@@ -7,18 +7,18 @@ class Scanner:
     def __repr__(self):
         return f"Scanner: {self.ip}"
     
-    def is_open(self, port):
+    def is_open(self,port):
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.settimeout(0.5)
-        result =  s.connect_ex((self.ip, port))
+        result = s.connect_ex((self.ip, port))
         s.close()
         return result == 0
-        
+            
     def add_port(self, port):
         self.open_ports.append(port)
 
     def scan(self, lowerport, upperport):
-        ports = [20,21,22,23,25,53,80,110,143,443,3306,3389]
+        ports = [20,21,22,23,25,53,80,110,143,443]
         for port in ports:
             if lowerport <= port <= upperport:
                 print(f"Scanning port {port}...")

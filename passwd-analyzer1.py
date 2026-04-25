@@ -3,7 +3,7 @@ print("Password Strength Analyzer")
 
 password = input("Enter your password: ")
 length = len(password)
-SC = "!@#$%^&*()-_=+[]{}/?<>|\:"
+SC = "!@#$%^&*()-_=+[]}{/?<>|:\;\`~"
 strength_score = 0
 
 
@@ -28,3 +28,7 @@ def calculate_strength(password):
     else:
         strength_score += 2
         print("Password is VERY strong!")
+
+print("Analyzing password strength. . .")
+calculate_strength(password)
+print(f"Password Strength Score: {strength_score}") 

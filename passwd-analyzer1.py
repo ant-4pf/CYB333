@@ -10,6 +10,7 @@ max_length = 25
 
 def calculate_strength(password, length):
     score = 0
+    length = len(password)
     feedback = ""
     
     # Check character types
